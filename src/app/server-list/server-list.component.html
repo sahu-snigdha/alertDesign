@@ -1,0 +1,152 @@
+<header class="py-3 mb-3 border-bottom">
+  <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
+  </div>
+</header>
+<div class="container-fluid pb-3">
+  <div class="d-grid gap-3" style="grid-template-columns: 0fr 2fr;">
+    <div class=" border rounded-3">
+      <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+          <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-5 fw-semibold">Alert Dashboard</span>
+        </a>
+        <ul class="list-unstyled ps-0">
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+              Data
+            </button>
+            <div class="collapse show" id="home-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Overview</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Updates</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Reports</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+              Backup
+            </button>
+            <div class="collapse" id="dashboard-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Overview</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Weekly</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Monthly</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Annually</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle link-dark d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+              Alert
+            </button>
+            <div class="collapse" id="orders-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Processed</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Shipped</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Returned</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="border-top my-3"></li>
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+              DNS
+            </button>
+            <div class="collapse" id="account-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New...</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Settings</a></li>
+                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    
+    </div>
+    <div class=" border rounded-3">
+      <header class="p-3 ">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            
+    
+           
+      <div class="form-check" *ngIf="emailId" style="margin-left: 112px;">
+        <input type="checkbox" class="form-check-input" id="sendAlertOnEmail"  name="sendAlertOnEmail" [checked]="true">
+        <label class="form-check-label bold-label" for="sendAlertOnEmail" >system is to configured to send Alert {{emailId}}</label>
+      </div> 
+    
+            <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" style="width: 630px; margin-top: 51px;">
+              <h2 class="ml-10">List of Servers</h2>
+              <div class="col-md-6">
+              <select  class="form-select" aria-label="Default select example" [(ngModel)]="selectedServer" (change)="onServerSelect($event.target.value)">
+                <option selected value="">-- Select a server --</option>
+                <option *ngFor="let obj of servers,let i=index" [value]="i">
+                {{obj.server}}
+              </option>
+              </select>
+              </div>
+            </div>
+    
+            <div class="text-end">
+              <button type="button" class="btn text-bg-dark me-2" (click)="addNewAlert()">Add New Alert</button>
+              <button type="button" class="btn text-bg-dark"  (click)="configureEmail()">Configure</button>
+              
+            </div>
+
+            <!-- Button trigger modal -->
+<button type="button" class="btn text-bg-dark me-2"  (click)="openModal()">
+  Open Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Host: {{SelectedServer}}</h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Modal content goes here...
+        <app-new-alert [selectedServer]="SelectedServer"></app-new-alert>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        <!-- Additional buttons or controls can be added here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+          </div>
+        </div>
+      </header>
+      <table class="table table-striped" *ngIf="showGrid" style=" margin-left: 79px;">
+        <thead>
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Condition</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of alerts,let i=index">
+            <td>{{ item.type }}</td>
+              <td>{{ item.condition? item.condition : item.url}}</td>
+            <td (click)="deleteRow(i)">delete</td>
+          </tr>
+        </tbody>
+      </table>
+
+    
+    
+
+    </div>
+  </div>
+  </div>

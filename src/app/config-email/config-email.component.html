@@ -1,0 +1,13 @@
+<h2>Configure Email Alerts</h2>
+<div class="form-check" style="margin-left: 112px;">
+    <input type="checkbox" class="form-check-input" id="sendAlertOnEmail" name="sendAlertOnEmail">
+    <label class="form-check-label" for="sendAlertOnEmail">{{msg}}</label>
+  </div>
+<div class="container">
+  <div class="form-group">
+    <label for="emailIds">Email IDs:</label>
+    <input type="text" class="form-control" id="emailIds" [(ngModel)]="emailIds" name="emailIds">
+  </div>
+
+  <button class="btn btn-primary">Save</button>
+</div>

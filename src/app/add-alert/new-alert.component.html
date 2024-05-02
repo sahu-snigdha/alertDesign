@@ -1,0 +1,46 @@
+<!-- <h2>Host:{{selectedServer}}</h2> -->
+<div class="container" style="width: 514px;">
+  <div class="form-group">
+    <label for="alertType" class="text-dark">Alert Type:</label>
+    <select class="form-select"  id="alertType" [(ngModel)]="selectedAlertType" name="alertType">
+      <option value="hardDiskMemoryLoad">Hard Disk</option>
+      <option value="hardDiskMemoryLoad"> Memory </option>
+      <option value="hardDiskMemoryLoad">Load Average</option>
+      <option value="webServer">Web Server</option>
+    </select>
+  </div>
+  <div *ngIf="selectedAlertType === 'hardDiskMemoryLoad'">
+    <div class="form-group">
+      <label for="condition" class="text-dark">Condition:</label>
+      <select class="form-select" id="condition" [(ngModel)]="selectedCondition" name="condition">
+        <option value="<">&lt;</option>
+        <option value=">">&gt;</option>
+        <option value="=">=</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="value" class="text-dark">Value:</label>
+      <input type="number" class="form-control" id="value" [(ngModel)]="value" name="value">
+    </div>
+  </div>
+  <div *ngIf="selectedAlertType === 'webServer'">
+    <div class="form-group">
+      <label for="url" class="text-dark">URL:</label>
+      <input type="text" class="form-control" id="url" [(ngModel)]="url" name="url">
+    </div>
+    <div class="form-group">
+      <label for="responseString" class="text-dark">Response String:</label>
+      <input type="text" class="form-control" id="responseString" [(ngModel)]="responseString" name="responseString">
+    </div>
+    <div class="form-group">
+      <label for="url" class="text-dark">Response</label>
+      <input type="text" class="form-control" id="Response" [(ngModel)]="Response" name="Response">
+    </div>
+    
+  </div>
+  <div style="margin-top: 3px;padding: 5px;">
+  <button class="btn btn-secondary" (click)="VarifyAlert()"   style="padding: 9px;  margin: 2px;  width: 98px;" *ngIf="selectedAlertType === 'webServer'">Varify</button>
+  <button class="btn btn-primary" (click)="addAlert()" style="padding: 9px;  margin: 2px;  width: 98px;">Add</button>
+  <button class="btn btn-secondary"  style="padding: 9px;  margin: 2px;  width: 98px;">Cancel</button>
+</div>
+</div>
